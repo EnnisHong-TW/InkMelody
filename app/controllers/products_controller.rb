@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   def new
+    @product = Product.new
   end
 
   def create
@@ -7,11 +8,27 @@ class ProductsController < ApplicationController
     # 寫入資料庫
     # 顯示"新增成功"
     # 跳轉其他頁面
-    product = Product.new(product_params)
+    @product = Product.new(product_params)
 
-    product.save
+    if @product.save
+      # flush[:notice] = '新增商品成功'
+      redirect_to root_path, notice: '新增商品成功'
+    else
+      render :new, alert: '新增商品失敗'
+    end
+  end 
 
-    redirect_to root_path
+  def index 
+    @products = Product.all.order(id: :desc)
+  end
+
+  def show
+    # @product = Product.find_by!(id: params[:id])
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.new(product_params)
   end 
 
   # Strong Parameter
