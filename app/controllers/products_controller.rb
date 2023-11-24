@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :find_product, except: [:new, :create, :index]
+  # before_action :find_product, except: [:new, :create, :index]
 
   def new
     @product = Product.new
