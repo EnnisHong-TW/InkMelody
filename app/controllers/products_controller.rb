@@ -56,6 +56,16 @@ class ProductsController < ApplicationController
   end
 
   def find_product
+    # begin
     @product = Product.find(params[:id])
+    # rescue ActiveRecord::RecordNotFound
+      # render html: '查無此資料', status: 404
+      # render file: Rails.public_path.join('404.html'), 
+            # status: 404, 
+            # status: :not_found,
+            # layout: false
+    # end
   end
+
+ 
 end
