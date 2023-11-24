@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
 
   def index 
     @products = Product.order(id: :desc)
+    # @products = Product.where(deleted_at: nil).order(id: :desc)
   end
 
   def show
@@ -45,6 +46,8 @@ class ProductsController < ApplicationController
 
   def destroy
     #@product = Product.find(params[:id])
+    # @product.destroy
+    # @product.update(deleted_at: Time.current)
     @product.destroy
     redirect_to root_path, notice: '商品刪除成功'
   end
@@ -58,6 +61,7 @@ class ProductsController < ApplicationController
   def find_product
     # begin
     @product = Product.find(params[:id])
+    # @product = Product.find(params[:id])
     # rescue ActiveRecord::RecordNotFound
       # render html: '查無此資料', status: 404
       # render file: Rails.public_path.join('404.html'), 
@@ -65,7 +69,5 @@ class ProductsController < ApplicationController
             # status: :not_found,
             # layout: false
     # end
-  end
-
- 
+  end 
 end
