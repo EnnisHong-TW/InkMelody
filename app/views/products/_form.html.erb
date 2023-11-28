@@ -8,27 +8,26 @@
                 <% end %>
         </ul>
     </section>
-    <% end %>
-        <%= form_with model: product, data: { turbo: false } do |form|%>
+<% end %>
+<%= form_with model: product, data: { turbo: false } do |form|%>
+    <div>
+        <%= form.label :title %>
+            <%= form.text_field :title, class: 'border-2 border-black m-2' %>
+    </div>
+    <div>
+        <%= form.label :description %>
+            <%= form.text_area :description, class: 'border-2 border-black m-2' %>
+    </div>
+    <div>
+        <%= form.label :price%>
+            <%= form.number_field :price, class: 'border-2 border-black m-2' , min: 0 %>
+    </div>
+    <div>
+        <%= form.label :onsale %>
+            <%= form.check_box :onsale %>
 
-            <div>
-                <%= form.label :title %>
-                    <%= form.text_field :title, class: 'border-2 border-black m-2' %>
-            </div>
-            <div>
-                <%= form.label :description %>
-                    <%= form.text_area :description, class: 'border-2 border-black m-2' %>
-            </div>
-            <div>
-                <%= form.label :price%>
-                    <%= form.number_field :price, class: 'border-2 border-black m-2' , min: 0 %>
-            </div>
-            <div>
-                <%= form.label :onsale %>
-                    <%= form.check_box :onsale %>
-
-            </div>
-            <div>
-                <%= form.submit class: 'bg-gray-500 text-white p-2 m-2' %>
-            </div>
-            <% end %>
+    </div>
+    <div>
+        <%= form.submit class: 'bg-gray-500 text-white p-2 m-2' %>
+    </div>
+<% end %>

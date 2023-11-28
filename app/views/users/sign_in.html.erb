@@ -1,0 +1,15 @@
+<h1>登入帳號</h1>
+
+<%= form_with(url: sessions_path, scope: "user", data: { turbo: false }) do |f| %>
+    <div>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+    </div>
+    <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </div>
+    <div>
+        <%= f.submit '登入' , class: 'ink-btn' %>
+    </div>
+<% end %>
