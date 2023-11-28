@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :products 
+  resources :products do
+    resources :comments, shallow: true, only:[:create, :destroy]
+  end
+
+  #resources :comments, only: [:show, :edit, :update, :destroy]
+
   resource :users, except: [:destory] do
     collection do
       get :sign_in

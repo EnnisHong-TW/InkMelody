@@ -7,12 +7,19 @@ class User < ApplicationRecord
   # before_save :encrypt_password
   before_create :encrypt_password
 
+  has_many :products
+  has_many :comments
+
   #{email: '..', password: '...'}
   def self.login(data)
     email = data[:email]
     password = Digest::SHA256.hexdigest("*xx#{data[:password]}yy-")
     # find_by(email: email, password: password)
     find_by(email: , password: )
+  end
+
+  def own?(p)
+    product_ids.include?(p.id)
   end
 
   private

@@ -1,7 +1,8 @@
-<%= link_to '編輯' , edit_product_path(@product), class: 'ink-btn' %>
-<%= link_to '刪除' , product_path(@product), class: 'ink-btn ink-btn-danger' , data: { turbo_method: 'delete' ,
-        turbo_confirm: '確定刪除？' } %>
-
+<% if user_signed_in? and current_user.own?(@product)  %>
+    <%= link_to '編輯' , edit_product_path(@product), class: 'ink-btn' %>
+    <%= link_to '刪除' , product_path(@product), class: 'ink-btn ink-btn-danger' , data: { turbo_method: 'delete' ,
+            turbo_confirm: '確定刪除？' } %>
+<% end %>
 <h1>
     <%= @product.title %>
 </h1>
@@ -10,3 +11,18 @@
 <p>
     <%= simple_format @product.description %>
 </p>
+
+<section>
+    <h3 class="text-xl">留言：</h3>
+    <%= form_with(model: [@product, @comment] ,data: { turbo: false}) do |form|%>
+        <%= form.text_area :content %>
+        <div>
+            <%= form.submit %>
+        </div>
+    <% end %>
+    <ul>
+    <% @comments.each do |comment| %>
+        <li><%= comment.content %></li>
+    <% end %>
+    </ul>
+</section>

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_owned_product, only: [ :edit, :update, :destroy]
 
   def new
     @product = Product.new
@@ -11,8 +12,14 @@ class ProductsController < ApplicationController
     # 寫入資料庫
     # 顯示"新增成功"
     # 跳轉其他頁面
-    @product = Product.new(product_params)
 
+    #從商品角度新增商品
+    #@product = Product.new(product_params)
+    #@product.user_id = current_user.id
+    #@product.user = current_user
+
+    #從user的角度去新增商品
+    @product = current_user.products.new(product_params)
     if @product.save
       # flush[:notice] = '新增商品成功'
       redirect_to root_path, notice: '新增商品成功'
@@ -29,6 +36,8 @@ class ProductsController < ApplicationController
   def show
     # @product = Product.find_by!(id: params[:id])
     # @product = Product.find(params[:id])
+    @comment = Comment.new
+    @comments = @product.comments
   end
 
   def edit
@@ -70,4 +79,8 @@ class ProductsController < ApplicationController
             # layout: false
     # end
   end 
+
+  def find_owned_product
+    @product = current_user.products.find(params[:id])
+  end
 end
