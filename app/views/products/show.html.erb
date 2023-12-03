@@ -15,7 +15,7 @@
 <section>
     <h3 class="text-xl">留言：</h3>
     <%= form_with(model: [@product, @comment] ,data: { turbo: false}) do |form|%>
-        <%= form.text_area :content %>
+        <%= form.text_area :content, class: 'input-field'%>
         <div>
             <%= form.submit %>
         </div>

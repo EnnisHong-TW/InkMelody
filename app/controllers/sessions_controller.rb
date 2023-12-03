@@ -19,6 +19,4 @@ class SessionsController < ApplicationController
     session.delete(:__user_ticket__)
     redirect_to root_path, notice: '已登出'
   end
-
-  
 end
