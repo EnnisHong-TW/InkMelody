@@ -2,15 +2,17 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="like"
 export default class extends Controller {
+  static targets = ["btn"];
   toggle(e) {
     e.preventDefault();
-
+    console.log(this.btnTarget);
     // const token_key = document.querySelector("meta[name='csrf-param']").content;
     const token = document.querySelector("meta[name='csrf-token']").content;
     // console.log(token);
 
-    // console.log("like");
-    const url = "/products/61/like";
+    const { id } = this.element.dataset;
+    console.log(id);
+    const url = `/products/${id}/like`;
 
     fetch(url, {
       method: "PATCH",
@@ -21,9 +23,11 @@ export default class extends Controller {
       .then((result) => result.json())
       .then(({ status }) => {
         if (status == "liked") {
-          console.log("喜歡");
+          this.btnTarget.textContent = "取消";
+          // console.log("喜歡");
         } else {
-          console.log("不喜歡");
+          this.btnTarget.textContent = "喜歡";
+          // console.log("不喜歡");
         }
       })
       .catch((err) => {

@@ -5,10 +5,13 @@
 <% end %>
 <h1>
     <%= @product.title %>
-    <%= link_to '喜歡', '#', class:"ink-btn", data: { 
-        controller: 'like', 
-        action: 'like#toggle'
-    } %>
+    <div data-controller="like", 
+            data-id ="<%= @product.id %>" >
+        <%= link_to '喜歡', '#', class:"ink-btn", data: { 
+            action: 'like#toggle',
+            like_target: 'btn'
+        } %>
+    </div>
 </h1>
 <h3>售價：<%= @product.price %>
 </h3>
