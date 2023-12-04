@@ -6,7 +6,7 @@
 <h1>
     <%= @product.title %>
     <div data-controller="like", 
-            data-id ="<%= @product.id %>" >
+            data-id ="<%= @product.id %>" data-path = "<%= like_api_v1_product_path %>" >
         <%= link_to '喜歡', '#', class:"ink-btn", data: { 
             action: 'like#toggle',
             like_target: 'btn'

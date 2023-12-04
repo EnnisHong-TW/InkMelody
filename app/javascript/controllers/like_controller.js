@@ -10,9 +10,10 @@ export default class extends Controller {
     const token = document.querySelector("meta[name='csrf-token']").content;
     // console.log(token);
 
-    const { id } = this.element.dataset;
+    const { id, path } = this.element.dataset;
     console.log(id);
-    const url = `/products/${id}/like`;
+    // const url = `/api/v1/products/${id}/like`;
+    const url = path;
 
     fetch(url, {
       method: "PATCH",

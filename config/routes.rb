@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
   resources :products do
     resources :comments, shallow: true, only:[:create, :destroy]
-    member do
-      patch :like
+    # member do
+    #   patch :like
+    # end
+  end
+
+  # /api
+  namespace :api do
+    namespace :v1 do
+      resources :products, only: [] do
+        member do
+          # /api/v1/products/id/like
+          patch :like
+        end
+      end
     end
   end
 
