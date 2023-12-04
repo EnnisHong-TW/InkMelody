@@ -3,6 +3,7 @@
 </div>
 <ul>
 <% @products.each do |product|%>
-    <li><%= link_to product.title, product_path(id: product)%></li>
+    <li>[<%= product.user.email.split("@").first %>]
+    <%= link_to product.title, product_path(id: product)%></li>
 <% end %>
 </ul>

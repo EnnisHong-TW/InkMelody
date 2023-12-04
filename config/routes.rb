@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :products do
     resources :comments, shallow: true, only:[:create, :destroy]
+    member do
+      patch :like
+    end
   end
 
   #resources :comments, only: [:show, :edit, :update, :destroy]
@@ -10,7 +13,7 @@ Rails.application.routes.draw do
       get :sign_in
     end
   end
-  
+
   resource :sessions, only: [:create, :destroy]
   # get '/users/sign_in', to: 'users#sign_in'
 
@@ -22,8 +25,8 @@ Rails.application.routes.draw do
   # patch '/products/:id', to: 'products#update'
   # delete '/products/:id', to: 'products#destroy'
   # get '/products/:id/edit', to: 'products#edit', as: :edit_product
-  
-  get "/about_us", to: "pages#about", as: :about 
+
+  get "/about_us", to: "pages#about", as: :about
   get "/privacy", to: "pages#privacy", as: :privacy
   root "products#index"
 end

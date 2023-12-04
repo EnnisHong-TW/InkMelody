@@ -5,6 +5,10 @@
 <% end %>
 <h1>
     <%= @product.title %>
+    <%= link_to '喜歡', '#', class:"ink-btn", data: { 
+        controller: 'like', 
+        action: 'like#toggle'
+    } %>
 </h1>
 <h3>售價：<%= @product.price %>
 </h3>
@@ -14,10 +18,10 @@
 
 <section>
     <h3 class="text-xl">留言：</h3>
-    <%= form_with(model: [@product, @comment] ,data: { turbo: false}) do |form|%>
+    <%= form_with(model: [@product, @comment], data: { turbo: false }) do |form|%>
         <%= form.text_area :content, class: 'input-field'%>
         <div>
-            <%= form.submit %>
+            <%= form.submit class:"ink-btn" %>
         </div>
     <% end %>
     <ul>

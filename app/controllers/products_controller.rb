@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show]
+  before_action :find_product, only: [:show, :like]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_owned_product, only: [ :edit, :update, :destroy]
 
@@ -26,10 +26,10 @@ class ProductsController < ApplicationController
     else
       render :new, alert: '新增商品失敗'
     end
-  end 
+  end
 
-  def index 
-    @products = Product.order(id: :desc)
+  def index
+    @products = Product.includes(:user).order(id: :desc)
     # @products = Product.where(deleted_at: nil).order(id: :desc)
   end
 
@@ -40,9 +40,13 @@ class ProductsController < ApplicationController
     @comments = @product.comments
   end
 
+  def like
+    render json: { status: 'liked' }
+  end
+
   def edit
     #@product = Product.find(params[:id])
-  end 
+  end
 
   def update
     #@product = Product.find(params[:id])
@@ -73,12 +77,12 @@ class ProductsController < ApplicationController
     # @product = Product.find(params[:id])
     # rescue ActiveRecord::RecordNotFound
       # render html: '查無此資料', status: 404
-      # render file: Rails.public_path.join('404.html'), 
-            # status: 404, 
+      # render file: Rails.public_path.join('404.html'),
+            # status: 404,
             # status: :not_found,
             # layout: false
     # end
-  end 
+  end
 
   def find_owned_product
     @product = current_user.products.find(params[:id])
