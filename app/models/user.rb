@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :products
   has_many :comments
 
+  has_many :like_products
+  has_many :liked_products, through: :like_products, source: :product
+
   #{email: '..', password: '...'}
   def self.login(data)
     email = data[:email]
