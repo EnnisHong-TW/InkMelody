@@ -11,6 +11,10 @@
 <% end %>
 <%= form_with model: product, data: { turbo: false } do |form|%>
     <div>
+        <%= form.label :cover %>
+        <%= form.file_field :cover, class:'border-2 border-black m-2' %>
+    </div>
+    <div>
         <%= form.label :title %>
             <%= form.text_field :title, class: 'border-2 border-black m-2' %>
     </div>

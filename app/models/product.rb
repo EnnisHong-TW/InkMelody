@@ -1,5 +1,8 @@
 class Product < ApplicationRecord
   # acts_as_paranoid
+  has_one_attached :cover do |attachable|
+    attachable.variant :thumb, resize_to_limit: [300, 300]
+  end
 
   belongs_to :user
   has_many :comments, ->{ order(id: :desc) }

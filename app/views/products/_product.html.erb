@@ -1,0 +1,15 @@
+<li class="p-2 rounded">
+    <div>
+        <%= link_to product_path(product) do %>
+        <figure>
+        <!--%= image_tag product.cover.variant(:thumb) if product.cover.attached? %-->
+            <%= product_cover(product, :thumb) %>
+        </figure>
+        <% end %>
+        <h2><%= product.title %></h2>
+        <span><%= product.price %></span>
+        <p>
+            <%= product.description %>
+        </p>
+    </div>
+</li>

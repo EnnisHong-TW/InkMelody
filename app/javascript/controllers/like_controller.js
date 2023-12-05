@@ -26,9 +26,9 @@ export default class extends Controller {
     const { id, path } = this.element.dataset;
     // console.log(id);
     // const url = `/api/v1/products/${id}/like`;
-    const url = path;
+    // const url = path ;
 
-    const response = await patch(path);
+    const response = await patch(path + ".json");
     if (response.ok) {
       const { status } = await response.json;
       this.btnTarget.textContent =
@@ -40,6 +40,9 @@ export default class extends Controller {
       //   this.btnTarget.textContent = LIKE_LABEL;
       //   // console.log("不喜歡");
       // }
+    } else {
+      const { next } = await response.json;
+      window.location.href = next;
     }
 
     // fetch(url, {
