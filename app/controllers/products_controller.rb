@@ -29,6 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def index
+    # flash[:notice] = "123" 用來寫關閉flash訊息的功能
     @products = Product.includes(:user).order(id: :desc)
     # @products = Product.where(deleted_at: nil).order(id: :desc)
   end
