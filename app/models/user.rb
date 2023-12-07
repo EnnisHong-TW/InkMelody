@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # before_save :encrypt_password
   before_create :encrypt_password
 
+
+  has_one :cart
+
   has_many :products
   has_many :comments
 

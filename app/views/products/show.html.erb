@@ -3,27 +3,41 @@
     <%= link_to '刪除' , product_path(@product), class: 'ink-btn ink-btn-danger' , data: { turbo_method: 'delete' ,
             turbo_confirm: '確定刪除？' } %>
 <% end %>
-<h1 class="flex items-center gap-2 text-2xl">
-    <%= @product.title %>
-    <div data-controller="like", 
-            data-id ="<%= @product.id %>" 
-            data-path = "<%= like_api_v1_product_path %>" 
-            data-liked = "<%= current_user&.liked?(@product) %>">
-        <%= link_to '讚', '#', class:"ink-btn", data: { 
-            action: 'like#toggle',
-            like_target: 'btn'
-        } %>
-    </div>
-</h1>
-<%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
 
-<h3>售價：<%= @product.price %>
-</h3>
+
+<section class="grid grid-col-2">
+
+<div class="col-span-1">
+    <%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
+</div>
+<div>
+    <h1 class="flex items-center gap-2 text-2xl">
+        <%= @product.title %>
+        <div data-controller="like", 
+                data-id ="<%= @product.id %>" 
+                data-path = "<%= like_api_v1_product_path %>" 
+                data-liked = "<%= current_user&.liked?(@product) %>">
+            <%= link_to '讚', '#', class:"ink-btn", data: { 
+                action: 'like#toggle',
+                like_target: 'btn'
+            } %>
+        </div>
+    </h1>
+    <h3 class="text-xl">售價：<%= @product.price %></h3>
+    <div>
+        <%= form_with url: cart_path, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :id, value: @product.id %>
+            <%= f.select :quantity, (1..10).to_a, {}, class:"border border-slate-500" %>
+            <button class='ink-btn'>加入購物車</button>
+        <% end %>
+    </div>
+</div>
 <p>
     <%= simple_format @product.description %>
 </p>
 
-<section>
+</section>
+<section class="mt-12">
     <h3 class="text-xl">留言：</h3>
     <%= form_with(model: [@product, @comment], data: { turbo: false }) do |form|%>
         <%= form.text_area :content, class: 'input-field'%>
