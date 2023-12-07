@@ -1,14 +1,7 @@
-<div class="flex gap-3">
-<h1>商品列表</h1><%= link_to "新增商品", new_product_path if user_signed_in? %>
-</div>
-<ul class="grid grid-cols-3 gap-3">
-<% @products.each do |product|%>
-    <%= render 'product', product: %>
-    <%
-=begin%>
- <li>[<%= product.user.email.split("@").first %>]
-    <%= link_to product.title, product_path(id: product)%></li> 
-<%
-=end%>
-<% end %>
+
+<h1>商品列表</h1>
+<%= link_to "新增商品", new_product_path, class:'ink-btn' if user_signed_in? %>
+
+<ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+    <%= render @products %>
 </ul>

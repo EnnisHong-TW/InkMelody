@@ -1,0 +1,17 @@
+<h1 class="text-2xl">購物車</h1>
+
+<section class="grid gap-4 grid-cols-3 ">
+  <div class="col-span-2 grid gap-2">
+    <%= render partial:'cart_item', collection: current_cart.cart_items, as: :item %>
+    <div>
+      <%= link_to '清空購物車', cart_path, class: 'ink-btn', data: { turbo_method: 'delete' } %>
+    </div>
+  </div>
+  <aside class="col-span-1">
+    <h2 class="text-xl">摘要</h2>
+    <ul>
+      <li>總計:<%= current_cart.total_amout %></li>
+    </ul>
+   <%= link_to '結帳', checkout_cart_path, class: 'ink-btn' %>
+  </aside>
+</section>

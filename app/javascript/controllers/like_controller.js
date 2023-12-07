@@ -1,18 +1,19 @@
 import { Controller } from "@hotwired/stimulus";
 import { patch } from "@rails/request.js";
 
-const LIKE_LABEL = "讚";
-const UNLIKE_LABEL = "收回讚";
+const LIKE_LABEL = "收藏";
+const UNLIKE_LABEL = "取消收藏";
 
 // Connects to data-controller="like"
 export default class extends Controller {
   static targets = ["btn"];
   connect() {
     const { liked } = this.element.dataset;
-    // console.log(liked);
     if (liked == "true") {
+      console.log(this.btnTarget);
       this.btnTarget.textContent = UNLIKE_LABEL;
     } else {
+      console.log(this.btnTarget);
       this.btnTarget.textContent = LIKE_LABEL;
     }
   }

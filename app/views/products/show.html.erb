@@ -5,44 +5,49 @@
 <% end %>
 
 
-<section class="grid grid-col-2">
-
-<div class="col-span-1">
-    <%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
-</div>
-<div>
-    <h1 class="flex items-center gap-2 text-2xl">
-        <%= @product.title %>
-        <div data-controller="like", 
-                data-id ="<%= @product.id %>" 
-                data-path = "<%= like_api_v1_product_path %>" 
-                data-liked = "<%= current_user&.liked?(@product) %>">
-            <%= link_to '讚', '#', class:"ink-btn", data: { 
-                action: 'like#toggle',
-                like_target: 'btn'
-            } %>
-        </div>
-    </h1>
-    <h3 class="text-xl">售價：<%= @product.price %></h3>
-    <div>
-        <%= form_with url: cart_path, data: { turbo: false } do |f| %>
+<section class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+    <div class="col-span-2">
+        <%= image_tag @product.cover.variant(:thumb) if @product.cover.attached? %>
+    </div>
+    <div class="col-span-1">
+        <%= form_with url: cart_path, 
+            data: { turbo: false }, 
+            class: 'flex flex-col gap-3' do |f| %>
             <%= f.hidden_field :id, value: @product.id %>
-            <%= f.select :quantity, (1..10).to_a, {}, class:"border border-slate-500" %>
-            <button class='ink-btn'>加入購物車</button>
+            <h2 class="flex items-center gap-2 text-2xl"><%= @product.title %></h2>
+            <h3 class="text-xl">售價：<%= @product.price %></h3>
+
+            <div>
+                <%= f.select :quantity, (1..10).to_a, {}, class:"border border-slate-500" %>
+                
+            </div>
+
+            <div class='ink-btn w-full text-center'>
+                <%= link_to '收藏','#', data: { 
+                    controller: 'like',
+                    path: like_api_v1_product_path,
+                    liked: current_user&.liked?(@product),
+                    action: 'like#toggle',
+                    like_target: 'btn'
+                } %>
+                    
+            </div>
+            <div>
+                <%= f.submit '加入購物車', class: 'ink-btn w-full' %>
+            </div>
         <% end %>
     </div>
-</div>
-<p>
-    <%= simple_format @product.description %>
-</p>
-
 </section>
-<section class="mt-12">
+    <p>
+        <%= simple_format @product.description %>
+    </p>
+<section>
     <h3 class="text-xl">留言：</h3>
-    <%= form_with(model: [@product, @comment], data: { turbo: false }) do |form|%>
-        <%= form.text_area :content, class: 'input-field'%>
+    <%= form_with(model: [@product, @comment], 
+                    data: { turbo: false }) do |form|%>
+        <%= form.text_area :content, class: 'field'%>
         <div>
-            <%= form.submit class:"ink-btn" %>
+            <%= form.submit "新增留言", class:"ink-btn" %>
         </div>
     <% end %>
     <ul>

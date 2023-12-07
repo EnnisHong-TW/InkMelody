@@ -27,7 +27,11 @@ Rails.application.routes.draw do
   end
 
   resource :sessions, only: [:create, :destroy]
-  resource :cart, only: [:show, :create, :update, :destroy]
+  resource :cart, only: [:show, :create, :destroy] do
+    collection do
+      get :checkout
+    end
+  end
   # get '/users/sign_in', to: 'users#sign_in'
 
 

@@ -13,8 +13,8 @@
   <body>
     <%= render "shared/navbar" %>
     <%= render "shared/flash" if flash.any? %>
-    <div class="px-2">
+    <main class="container p-4 mx-auto">
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

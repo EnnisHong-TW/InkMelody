@@ -1,9 +1,9 @@
 module ProductsHelper
-  def product_cover(product, variant)
+  def product_cover(product, variant = :thumb)
     if product.cover.attached?
       image_tag product.cover.variant(variant)
     else
-      image_tag "/images/product/default.jpg", style: "height:300px;"
+      image_tag "/images/product/default.jpg"
     end
   end
 end
