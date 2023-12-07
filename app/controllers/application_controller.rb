@@ -2,11 +2,21 @@ class ApplicationController < ActionController::Base
   # include UsersHelper
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  helper_method :current_user, :user_signed_in?
+  helper_method :current_user, :user_signed_in?, :current_cart
 
   private
 
+  def current_cart
+    if user_signed_in?
+      # 使用實體變數達到 memorization 避免重複查詢
+      @__cart__ ||= ( current_user.cart || current_user.create_cart )
+    else
+      Cart.new
+    end
+  end
+
   def current_user
+    # 使用實體變數達到 memorization 避免重複查詢
     @__user__ ||= User.find_by(id: session[:__user_ticket__])
   end
 
