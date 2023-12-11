@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   # patch '/products/:id', to: 'products#update'
   # delete '/products/:id', to: 'products#destroy'
   # get '/products/:id/edit', to: 'products#edit', as: :edit_product
-
+  get "/search", to: "products#search"
   get "/about_us", to: "pages#about", as: :about
   get "/privacy", to: "pages#privacy", as: :privacy
   root "products#index"

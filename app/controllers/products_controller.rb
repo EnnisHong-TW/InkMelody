@@ -30,8 +30,16 @@ class ProductsController < ApplicationController
 
   def index
     # flash[:notice] = "123" 用來寫關閉flash訊息的功能
-    @products = Product.includes(:user).order(id: :desc)
+    @products = Product.includes(:user)
+                        .order(id: :desc)
+                        .page(params[:page])
+                        .per(4)
+    # 裝套件才有page和per
     # @products = Product.where(deleted_at: nil).order(id: :desc)
+  end
+
+  def search
+    @products = Product.where("title like ? OR description like ?","%#{params[:q]}%","%#{params[:q]}%").order(id: :desc)
   end
 
   def show
@@ -42,7 +50,8 @@ class ProductsController < ApplicationController
   end
 
   def my
-    @products = current_user.products
+    @products = current_user.products.page(params[:page])
+    .per(4)
   end
 
   def edit
