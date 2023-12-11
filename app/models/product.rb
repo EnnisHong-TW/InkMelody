@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   # acts_as_paranoid
+  acts_as_list scope: :user
+
   has_one_attached :cover do |attachable|
     attachable.variant :thumb, resize_to_limit: [300, 300]
   end

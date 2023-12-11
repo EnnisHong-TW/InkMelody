@@ -11,27 +11,26 @@
 <% end %>
 <%= form_with model: product, data: { turbo: false } do |form|%>
     <div>
-        <%= form.label :cover %>
-        <%= form.file_field :cover, class:'border-2 border-black m-2' %>
+        <%= form.label :cover, class:'label' %>
+        <%= form.file_field :cover, class:'file-input file-input-sm file-input-bordered w-full max-w-xs' %>
     </div>
     <div>
-        <%= form.label :title %>
-            <%= form.text_field :title, class: 'border-2 border-black m-2' %>
+        <%= form.label :title , class:'label'%>
+        <%= form.text_field :title, class: 'input input-bordered input-sm w-full max-w-xs' %>
     </div>
     <div>
-        <%= form.label :description %>
-            <%= form.text_area :description, class: 'border-2 border-black m-2' %>
+        <%= form.label :description , class:'label'%>
+        <%= form.text_area :description, class: 'textarea textarea-bordered w-full max-w-xs' %>
     </div>
     <div>
-        <%= form.label :price%>
-            <%= form.number_field :price, class: 'border-2 border-black m-2' , min: 0 %>
+        <%= form.label :price, class:'label'%>
+        <%= form.number_field :price, class: 'input input-bordered input-sm w-full max-w-xs' , min: 0 %>
     </div>
     <div>
         <%= form.label :onsale %>
-            <%= form.check_box :onsale %>
-
+        <%= form.check_box :onsale %>
     </div>
     <div>
-        <%= form.submit class: 'bg-gray-500 text-white p-2 m-2' %>
+        <%= form.submit class: 'btn btn-sm btn-primary' %>
     </div>
 <% end %>

@@ -10,8 +10,9 @@ class User < ApplicationRecord
 
   has_one :cart
 
-  has_many :products
+  has_many :products, -> { order(position: :asc) }
   has_many :comments
+  has_many :orders
 
   has_many :like_products
   has_many :liked_products, through: :like_products, source: :product

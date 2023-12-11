@@ -28,7 +28,8 @@
 =end%>
         <i class="fa-solid fa-cart-shopping fa-xl"></i>
         <% if current_cart.count > 0 %>            
-          <span class="absolute inline-block w-4 h-4 text-xs text-center bg-red-500 rounded-full -top-2 -right-3"><%= current_cart.count %></span>
+          <span class="absolute badge badge-xs badge-secondary rounded -top-1 -right-2"><%= current_cart.count %></span>
+          
         <% end %>
       <% end %>
     </li>

@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  include Braintreeable
   # before_action :authenticate_user!
   before_action :find_product, only:[:create]
 
@@ -19,8 +20,23 @@ class CartsController < ApplicationController
     redirect_to root_path, notice: '購物車已清空'
   end
 
+  def checkout
+    @order = Order.new
+    @token = braintree_gateway.client_token.generate
+
+  end
+
   private
   def find_product
     @product = Product.find(params[:id])
   end
+
+  # def gateway
+  #   Braintree::Gateway.new(
+  #     :environment => :sandbox,
+  #     :merchant_id => "mshfmqycgyxh3wdw",
+  #     :public_key => "rh9st67ck9bwyktk",
+  #     :private_key => "140c87c7702e1ae5c79b54e6bd6756a2",
+  #   )
+  # end
 end

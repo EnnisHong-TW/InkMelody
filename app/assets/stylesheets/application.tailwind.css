@@ -32,9 +32,13 @@
 }
 
 .ink-border {
-  @apply inline-block border-gray-500 border-1 rounded px-2 py-1 mx-1 my-3;
+  @apply inline-block border-gray-500 rounded px-2 py-1 mx-1 my-3;
 }
 
 .field {
   @apply border-2 border-black;
+}
+
+.drag-ghost {
+  @apply bg-slate-200 border-2 border-gray-400;
 }

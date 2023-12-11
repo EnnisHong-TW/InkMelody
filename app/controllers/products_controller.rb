@@ -41,6 +41,10 @@ class ProductsController < ApplicationController
     @comments = @product.comments
   end
 
+  def my
+    @products = current_user.products
+  end
+
   def edit
     #@product = Product.find(params[:id])
   end

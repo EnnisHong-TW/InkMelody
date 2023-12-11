@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   resources :products do
+    collection do
+      get :my
+    end
     resources :comments, shallow: true, only:[:create, :destroy]
     # member do
     #   patch :like
     # end
   end
+
+  resources :orders, only: [:create]
 
   # /api
   namespace :api do
@@ -13,6 +18,7 @@ Rails.application.routes.draw do
         member do
           # /api/v1/products/id/like
           patch :like
+          patch :sort
         end
       end
     end

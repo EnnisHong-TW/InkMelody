@@ -1,0 +1,32 @@
+<h1 class="text-2xl">結帳</h1>
+
+總計:<%= current_cart.total_amout %>
+<section>
+  <div class="col-span-2 grid gap-2">
+    <%= render partial:'cart_item', collection: current_cart.cart_items, as: :item %>
+  </div>
+  <aside>
+    <h2 class="text-xl">摘要</h2>
+    <ul>
+      <li>總計:<%= current_cart.total_amout %></li>
+    </ul>
+  </aside>
+</section>
+<section>
+  <%= form_with model: [@order] do |f| %>
+    <div>
+      <%= f.label :recipient, '收件人' %>
+      <%= f.text_field :recipient, class:'border-2 border-black m-2' %>
+    </div>
+    <div>
+      <%= f.label :address, '地址' %>
+      <%= f.text_field :address, class:'border-2 border-black m-2' %>
+    </div>
+    <div>
+      <%= f.label :tel, '電話' %>
+      <%= f.text_field :tel, class:'border-2 border-black m-2' %>
+    </div>
+    <div data-controller="braintree" data-token="<%= @token %>"></div>
+    <div><%= f.submit '送出', class: 'btn btn-neutral' %></div>
+  <% end %>
+</section>

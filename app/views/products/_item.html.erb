@@ -1,0 +1,22 @@
+<li data-id="<%= product.id %>" class="p-2 border rounded shadow border-slate-300 bg-white">
+    <div>
+        <%= link_to edit_product_path(product) do %>
+        <figure>
+            <%= product_cover(product) %>
+        </figure>
+        <% end %>
+        <h2><%= product.title %></h2>
+        <span><%= product.price %></span>
+        <p>
+            <%= product.description %>
+        </p>
+    </div>
+    <%
+=begin%>
+ <div>
+      <%= link_to "編", edit_product_path(product), class:'ink-btn' %>
+      <%= link_to "刪", product_path(product), data:{ turbo_method:'delete' }, class:'ink-btn' %>
+    </div> 
+<%
+=end%>
+</li>

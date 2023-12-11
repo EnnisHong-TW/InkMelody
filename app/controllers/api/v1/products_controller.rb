@@ -1,5 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :find_product, only: [:like]
+  before_action :find_user_product, only: [:sort]
   before_action :authenticate_user!
 
   def like
@@ -15,8 +16,17 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
+  def sort
+    @product.insert_at(params[:newIndex] + 1)
+    render json: {'result':123}
+  end
+
   private
   def find_product
     @product = Product.find(params[:id])
+  end
+
+  def find_user_product
+    @product = current_user.products.find(params[:id])
   end
 end
