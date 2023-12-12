@@ -1,4 +1,20 @@
-<li data-id="<%= product.id %>" class="p-2 border rounded shadow border-slate-300 bg-white">
+<%= tag.li data:{ id: product.id }, class:class_names("p-2 border rounded shadow border-slate-300 bg-white", "grayscale": !product.onsale) do %>
+  <div>
+    <%= link_to edit_product_path(product) do %>
+    <figure>
+        <%= product_cover(product) %>
+    </figure>
+    <% end %>
+    <h2><%= product.title %></h2>
+    <span><%= product.price %></span>
+    <p>
+        <%= product.description %>
+    </p>
+  </div>
+<% end %>
+
+<!-- li data-id="<%= product.id %>" 
+  class="<%= class_names("p-2 border rounded shadow border-slate-300 bg-white", "grayscale": !product.onsale) %>">
     <div>
         <%= link_to edit_product_path(product) do %>
         <figure>
@@ -11,12 +27,4 @@
             <%= product.description %>
         </p>
     </div>
-    <%
-=begin%>
- <div>
-      <%= link_to "編", edit_product_path(product), class:'ink-btn' %>
-      <%= link_to "刪", product_path(product), data:{ turbo_method:'delete' }, class:'ink-btn' %>
-    </div> 
-<%
-=end%>
-</li>
+</li -->

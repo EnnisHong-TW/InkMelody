@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # acts_as_paranoid
+  acts_as_paranoid
   acts_as_list scope: :user
 
   has_one_attached :cover do |attachable|
@@ -18,10 +18,22 @@ class Product < ApplicationRecord
   #scope
   # scope :ok, -> { where(deleted_at: nil) }
   # scope :cheap, -> { where("price <=30") }
-  default_scope { where(deleted_at: nil) }
+  default_scope { where(onsale: true) }
+
+  # def self.search(q)
+  #   Product.where("title like ? OR description like ?","%#{q}%","%#{q}%").order(id: :desc)
+  # end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["description", "onsale", "price", "title"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
 
   #軟刪除(加上時間戳記)
-  def destroy
-    update(deleted_at: Time.current)
-  end
+  # def destroy
+  #   update(deleted_at: Time.current)
+  # end
 end

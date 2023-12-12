@@ -39,7 +39,10 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.where("title like ? OR description like ?","%#{params[:q]}%","%#{params[:q]}%").order(id: :desc)
+    # @products = Product.where("title like ? OR description like ?","%#{params[:q]}%","%#{params[:q]}%").order(id: :desc)
+    # @products = Product.search(params[:q])
+    data = Product.ransack(title_or_description_cont: params[:q], onsale_eq: true)
+    @products = data.result
   end
 
   def show
@@ -50,8 +53,7 @@ class ProductsController < ApplicationController
   end
 
   def my
-    @products = current_user.products.page(params[:page])
-    .per(4)
+    @products = current_user.products.unscope(where: :onsale).page(params[:page]).per(4)
   end
 
   def edit
@@ -61,7 +63,7 @@ class ProductsController < ApplicationController
   def update
     #@product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to product_path(@product), notice: '更新成功'
+      redirect_to my_products_path(@product), notice: '更新成功'
     else
       render :edit
     end
@@ -95,6 +97,6 @@ class ProductsController < ApplicationController
   end
 
   def find_owned_product
-    @product = current_user.products.find(params[:id])
+    @product = current_user.products.unscope(:where).find(params[:id])
   end
 end

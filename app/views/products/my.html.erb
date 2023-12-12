@@ -3,6 +3,3 @@
 <ul class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4" data-controller="drag">
     <%= render partial: 'item', collection: @products, as: :product %>
 </ul>
-<footer>
-    <%= paginate(@products) %> <!--kaminari 套件提供paginate-->    
-</footer>
