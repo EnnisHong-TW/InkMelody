@@ -7,13 +7,13 @@
     <section class="flex items-center gap-2">
       <ul class="flex gap-3">
         <li>
-          <%= link_to "商品列表" , products_path%>
+          <%= link_to t('navbar.products') , products_path%>
         </li>
         <li>
-          <%= link_to "關於" , about_path%>
+          <%= link_to t('navbar.about') , about_path%>
         </li>
         <li>
-          <%= link_to "隱私權政策" , privacy_path%>
+          <%= link_to t('navbar.privacy') , privacy_path%>
         </li>
       </ul>
       <form action="/search" data-turbo="false">
@@ -43,14 +43,14 @@
         <li><%= current_user.email %></li>
         
         <li>
-          <%= link_to "登出", sessions_path, data: { turbo_method: "delete" } %>
+          <%= link_to t('navbar.logout'), sessions_path, data: { turbo_method: "delete" } %>
         </li>
       <% else %> 
         <li>
-          <%= link_to "註冊" , new_users_path %>
+          <%= link_to t('navbar.register') , new_users_path %>
         </li>
         <li>
-          <%= link_to "登入" , sign_in_users_path %>
+          <%= link_to t('navbar.login') , sign_in_users_path %>
         </li>
       <% end %>
       

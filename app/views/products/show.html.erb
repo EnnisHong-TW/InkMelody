@@ -46,7 +46,7 @@
     <%= form_with(model: [@product, @comment]) do |form|%>
         <%= form.text_area :content, class: 'field'%>
         <div>
-            <%= form.submit "新增留言", class:"ink-btn" %>
+            <%= form.submit class:"ink-btn" %>
         </div>
     <% end %>
     <ul id="comment_area">
