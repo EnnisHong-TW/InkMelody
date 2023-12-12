@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <% if product.errors.any? %>
     <section class="bg-rose-600 my-4 p-4 text-white">
         <ul>
@@ -31,6 +32,11 @@
         <%= form.check_box :onsale %>
     </div>
     <div>
-        <%= form.submit class: 'btn btn-sm btn-primary' %>
+        <%= form.label :publish_date , class:'label' %>
+        <%= form.text_field :publish_date, data: { controller: "datepicker" },  
+                                            class: 'input input-bordered input-sm w-full max-w-xs' %>
+    </div>
+    <div class="my-4">
+        <%= form.submit class: 'btn btn-sm btn-primary'%>
     </div>
 <% end %>
